@@ -24,7 +24,7 @@
                     </li>
                     <li>
                         <a class="boton-menu boton-carrito active" href="./nostros.html">
-                            <i class="bi bi-cart-fill"></i> Login
+                            <i class="bi bi-caret-right"></i> Login
                         </a>
                     </li>
                 </ul>
@@ -43,6 +43,20 @@
                         <button class="boton-ingresar" type="submit">Ingresar</button>
                     </form>
                         <p class="mensaje" id="mensaje"></p>
+
+                        <hr>
+
+                        <h3 class="titulo-principal">Registrarse</h3>
+                        <form class="form-login" id="form-registro">
+                            <input class="input-login" type="text" id="new-username" placeholder="Nuevo Usuario" required>
+                            <input class="input-login" type="password" id="new-password" placeholder="Nueva Contraseña" required>
+                            <select class="input-login" id="new-role">
+                                <option value="USUARIO">Usuario</option>
+                                <option value="ADMIN">Administrador</option>
+                            </select>
+                            <button class="boton-ingresar" type="submit">Registrar</button>
+                        </form>
+                        <p class="mensaje" id="mensajeRegistro"></p>
                 </div>
             </body>
         </main>
@@ -51,3 +65,4 @@
     <script src="./js/login.js"></script>
 </body>
 </html>
+
