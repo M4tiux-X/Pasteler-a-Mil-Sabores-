@@ -153,7 +153,7 @@ function incrementarCantidad(e) {
     }
 }
 
-// Decrementa la cantidad de un producto en el carrito          //Luciano explocame porfavor 
+// Decrementa la cantidad de un producto en el carrito
 function decrementarCantidad(e) {
     const idBoton = e.currentTarget.id;
     const index = productosEnCarrito.findIndex(producto => producto.id === idBoton);
@@ -220,12 +220,30 @@ function vaciarCarrito() {
     actualizarNumeritoCarrito();
 }
 
-// Simula la compra del carrito
+// =======================================
+// FUNCIÓN DE COMPRA Y GENERACIÓN DE BOLETA
+// =======================================
+
 function comprarCarrito() {
     if (productosEnCarrito.length > 0) {
+        const confirmar = confirm("¿Deseas confirmar la compra?");
+        if (!confirmar) return;
+
+        const nuevaBoleta = {
+            id: Date.now(),
+            fecha: new Date().toLocaleString(),
+            productos: productosEnCarrito,
+            total: productosEnCarrito.reduce((acc, p) => acc + p.precio * p.cantidad, 0)
+        };
+
+        let boletasGuardadas = JSON.parse(localStorage.getItem("boletasGuardadas")) || [];
+        boletasGuardadas.push(nuevaBoleta);
+        localStorage.setItem("boletasGuardadas", JSON.stringify(boletasGuardadas));
+
+        // Vaciar carrito tras compra
         productosEnCarrito = [];
         actualizarLocalStorage();
-        
+
         // Mostrar mensaje de compra exitosa
         contenedorCarritoVacio.classList.add("disabled");
         contenedorCarritoProductos.classList.add("disabled");
@@ -233,6 +251,8 @@ function comprarCarrito() {
         contenedorCarritoComprado.classList.remove("disabled");
         
         actualizarNumeritoCarrito();
+    } else {
+        alert("El carrito está vacío");
     }
 }
 
